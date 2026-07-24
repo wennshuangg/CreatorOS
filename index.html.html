@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://webview.e2b.sh3.sandbox.cloudstudio.club/deploy/index.html -->
+<html lang="zh-CN" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f5f2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Creator OS">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ff8a5b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff5e7e%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2240%22%20fill%3D%22url(%23g)%22%2F%3E%3Ctext%20x%3D%2290%22%20y%3D%22128%22%20font-size%3D%22120%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff%22%20font-family%3D%22-apple-system%2Csans-serif%22%3E%E2%97%90%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <title>Creator OS · 创作者的工作流</title>
+  <style>
+/* =========================================================
+   Creator OS · 设计系统
+   Apple Journal 暖色 + Arc 圆润 + Linear 简洁
+   ========================================================= */
+
+/* ---------- 主题变量 ---------- */
+:root {
+  --bg: #f6f5f2;
+  --bg-grad-1: #fff7f2;
+  --bg-grad-2: #f2f4ff;
+  --surface: #ffffff;
+  --surface-2: #fbfaf8;
+  --surface-3: #f3f2ef;
+  --border: rgba(20, 20, 30, 0.08);
+  --border-strong: rgba(20, 20, 30, 0.14);
+  --text: #1c1c1e;
+  --text-2: #6e6e73;
+  --muted: #9a9aa0;
+  --accent: #ff6a3d;
+  --accent-2: #6c5ce7;
+  --accent-soft: rgba(255, 106, 61, 0.12);
+  --accent-grad: linear-gradient(135deg, #ff8a5b 0%, #ff5e7e 100%);
+  --ok: #34c759;
+  --warn: #ff9f0a;
+  --danger: #ff453a;
+  --info: #0a84ff;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.04);
+  --shadow: 0 1px 3px rgba(0,0,0,.05), 0 10px 34px rgba(0,0,0,.06);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.14);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-xs: 9px;
+  --sidebar-w: 248px;
+  --ai-w: 348px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+[data-theme="dark"] {
+  --bg: #0e0e11;
+  --bg-grad-1: #16121a;
+  --bg-grad-2: #10131f;
+  --surface: #1a1a1e;
+  --surface-2: #202024;
+  --surface-3: #26262b;
+  --border: rgba(255,255,255,.08);
+  --border-strong: rgba(255,255,255,.16);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --muted: #6e6e73;
+  --accent: #ff7a52;
+  --accent-2: #8b7bff;
+  --accent-soft: rgba(255,122,82,.16);
+  --accent-grad: linear-gradient(135deg, #ff8a5b 0%, #ff5e7e 100%);
+  --ok: #30d158;
+  --warn: #ffd60a;
+  --danger: #ff453a;
+  --info: #0a84ff;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3), 0 2px 10px rgba(0,0,0,.3);
+  --shadow: 0 1px 3px rgba(0,0,0,.4), 0 12px 40px rgba(0,0,0,.45);
+  --shadow-lg: 0 24px 70px rgba(0,0,0,.6);
+}
+
+/* ---------- 基础 ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: auto; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+    "Helvetica Neue", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+b, strong { font-weight: 600; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); background-clip: padding-box; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 应用布局 ---------- */
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr var(--ai-w);
+  align-items: start;
+  min-height: 100dvh;
+  transition: grid-template-columns .35s var(--ease);
+}
+.app.ai-hidden { grid-template-columns: var(--sidebar-w) 1fr 0px; }
+.app.ai-hidden .ai-panel { transform: translateX(100%); opacity: 0; pointer-events: none; }
+
+/* ---------- 侧边栏 ---------- */
+.sidebar {
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 18px 14px;
+  overflow-y: auto;
+  position: sticky; top: 0; height: 100dvh;
+  z-index: 40;
+}
+.brand { display: flex; align-items: center; gap: 11px; padding: 6px 8px 18px; }
+.brand-logo {
+  width: 36px; height: 36px; border-radius: 11px;
+  background: var(--accent-grad);
+  display: grid; place-items: center;
+  color: #fff; font-size: 20px; font-weight: 700;
+  box-shadow: 0 6px 16px rgba(255,94,126,.34);
+}
+.brand-name { font-weight: 700; font-size: 16.5px; letter-spacing: .2px; }
+.brand-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+.nav { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.nav-group-label {
+  font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--muted); font-weight: 600;
+  padding: 16px 12px 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 12px;
+  color: var(--text-2); font-weight: 500; font-size: 14.5px;
+  position: relative; transition: background .18s, color .18s;
+  text-align: left; width: 100%;
+}
+.nav-item .nav-ico { font-size: 17px; width: 22px; text-align: center; filter: grayscale(.2); }
+.nav-item .nav-step {
+  position: absolute; left: -2px; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 0; border-radius: 3px; background: var(--accent);
+  transition: height .25s var(--ease);
+}
+.nav-item:hover { background: var(--surface-3); color: var(--text); }
+.nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item.active .nav-ico { filter: grayscale(0); }
+.nav-item.active .nav-step { height: 22px; }
+.nav-item .nav-badge {
+  margin-left: auto; font-size: 11px; background: var(--accent); color: #fff;
+  padding: 1px 7px; border-radius: 20px; font-weight: 600;
+}
+.nav-item .nav-badge.dot { background: var(--ok); padding: 0; width: 7px; height: 7px; }
+
+.sidebar-footer { padding: 12px 6px 2px; border-top: 1px solid var(--border); margin-top: 8px; }
+.streak-mini {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2);
+  padding: 8px 10px; background: var(--surface); border-radius: 12px; margin-bottom: 8px;
+}
+.streak-mini .flame { font-size: 15px; }
+.streak-mini b { color: var(--text); }
+.user-chip {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 8px 10px; border-radius: 12px; transition: background .18s;
+}
+.user-chip:hover { background: var(--surface-3); }
+.avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent-grad); color: #fff;
+  display: grid; place-items: center; font-weight: 600; font-size: 13px;
+}
+.user-name { font-size: 13.5px; font-weight: 600; }
+
+/* ---------- 主内容 ---------- */
+.main { display: flex; flex-direction: column; min-width: 0; background: var(--bg); }
+.topbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 26px; padding-top: max(16px, env(safe-area-inset-top));
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-title h1 { font-size: 21px; font-weight: 700; letter-spacing: .2px; }
+.topbar-sub { font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+.topbar-actions { margin-left: auto; display: flex; gap: 8px; }
+.icon-btn {
+  width: 38px; height: 38px; border-radius: 11px;
+  display: grid; place-items: center; font-size: 17px;
+  color: var(--text-2); transition: background .16s, transform .16s, color .16s;
+}
+.icon-btn:hover { background: var(--surface-3); color: var(--text); }
+.icon-btn:active { transform: scale(.92); }
+.menu-btn { display: none; }
+.ai-toggle { background: var(--accent-soft); color: var(--accent); }
+.ai-toggle:hover { background: var(--accent-soft); color: var(--accent); }
+
+.content { padding: 24px 26px 60px; }
+.content-inner { max-width: 1080px; margin: 0 auto; }
+.page-fade { animation: fade .4s var(--ease); }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 通用卡片/区块 ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm);
+}
+.card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.card-head .ch-ico { font-size: 18px; }
+.card-head h2 { font-size: 15.5px; font-weight: 650; }
+.card-head .ch-sub { font-size: 12px; color: var(--muted); margin-left: auto; }
+.section-label {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--muted); margin: 26px 2px 12px;
+}
+.section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px; justify-content: center;
+  padding: 9px 15px; border-radius: 11px; font-weight: 600; font-size: 13.5px;
+  background: var(--surface-3); color: var(--text); transition: transform .12s, background .16s, box-shadow .16s;
+}
+.btn:hover { background: var(--border-strong); }
+.btn:active { transform: scale(.96); }
+.btn-primary { background: var(--accent-grad); color: #fff; box-shadow: 0 6px 18px rgba(255,94,126,.32); }
+.btn-primary:hover { filter: brightness(1.05); background: var(--accent-grad); }
+.btn-ghost { background: transparent; color: var(--text-2); }
+.btn-ghost:hover { background: var(--surface-3); color: var(--text); }
+.btn-sm { padding: 6px 11px; font-size: 12.5px; border-radius: 9px; }
+.btn-danger { color: var(--danger); }
+.btn-block { width: 100%; }
+
+/* ---------- 输入 ---------- */
+.input, .textarea, select.input {
+  width: 100%; padding: 11px 13px; border-radius: 11px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text); transition: border .16s, box-shadow .16s, background .16s;
+}
+.input:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.textarea { resize: vertical; min-height: 84px; line-height: 1.6; }
+.input::placeholder, .textarea::placeholder { color: var(--muted); }
+.field-label { font-size: 12.5px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; display: block; }
+
+/* ---------- 今日首页 ---------- */
+.hero {
+  border-radius: 22px; padding: 26px 28px; color: #fff; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #ff9a6b 0%, #ff5e7e 55%, #8b5cf6 120%);
+  box-shadow: 0 18px 44px rgba(255,94,126,.32); margin-bottom: 22px;
+}
+.hero::after {
+  content: ""; position: absolute; right: -40px; top: -60px; width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(255,255,255,.28), transparent 70%); border-radius: 50%;
+}
+.hero-row { display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 1; }
+.hero h2 { font-size: 26px; font-weight: 750; letter-spacing: .3px; }
+.hero .greet-sub { opacity: .92; margin-top: 4px; font-size: 14px; }
+.hero-meta { display: flex; gap: 16px; margin-top: 16px; position: relative; z-index: 1; flex-wrap: wrap; }
+.hero-meta .hm { background: rgba(255,255,255,.16); backdrop-filter: blur(6px); padding: 8px 14px; border-radius: 13px; }
+.hero-meta .hm .v { font-size: 17px; font-weight: 700; }
+.hero-meta .hm .k { font-size: 11.5px; opacity: .85; }
+.weather { text-align: right; }
+.weather .wt { font-size: 30px; }
+.weather .wd { opacity: .92; font-size: 13px; }
+
+/* 今日指南针 */
+.compass {
+  background: linear-gradient(135deg, rgba(255,106,61,.10), rgba(108,92,231,.10));
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px;
+}
+.compass .c-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
+.compass .c-text { font-size: 18px; font-weight: 600; margin-top: 8px; line-height: 1.5; }
+.compass .c-edit { margin-top: 12px; }
+
+/* 优先级清单 */
+.prio-item { display: flex; align-items: center; gap: 12px; padding: 10px 4px; border-bottom: 1px solid var(--border); }
+.prio-item:last-child { border-bottom: none; }
+.check {
+  width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--border-strong);
+  flex-shrink: 0; display: grid; place-items: center; transition: all .16s; cursor: pointer;
+}
+.check:hover { border-color: var(--accent); }
+.check.done { background: var(--accent-grad); border-color: transparent; }
+.check.done::after { content: "✓"; color: #fff; font-size: 13px; font-weight: 700; }
+.prio-item .ptext { flex: 1; font-size: 14.5px; }
+.prio-item.done .ptext { color: var(--muted); text-decoration: line-through; }
+.prio-item .del { opacity: 0; color: var(--muted); font-size: 16px; padding: 0 4px; }
+.prio-item:hover .del { opacity: 1; }
+
+/* AI 今日建议卡片 */
+.ai-suggest {
+  background: linear-gradient(135deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 18px;
+  position: relative; overflow: hidden;
+}
+.ai-suggest .ai-glow { position: absolute; right: -20px; top: -30px; width: 120px; height: 120px; background: radial-gradient(circle, var(--accent-soft), transparent 70%); }
+.ai-suggest h3 { font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
+.ai-suggest ul { margin: 10px 0 0; padding-left: 4px; list-style: none; }
+.ai-suggest li { padding: 7px 0; font-size: 14px; color: var(--text-2); display: flex; gap: 9px; }
+.ai-suggest li::before { content: "▹"; color: var(--accent); }
+
+/* 时间轴 / 日程 */
+.sched-item { display: flex; gap: 14px; padding: 10px 0; }
+.sched-time { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 13.5px; color: var(--text-2); width: 46px; flex-shrink: 0; }
+.sched-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+.sched-body .st { font-size: 14px; font-weight: 550; }
+.sched-body .sd { font-size: 12.5px; color: var(--muted); }
+
+/* 进度条 */
+.progress { height: 8px; border-radius: 8px; background: var(--surface-3); overflow: hidden; }
+.progress > i { display: block; height: 100%; border-radius: 8px; background: var(--accent-grad); transition: width .5s var(--ease); }
+
+/* 项目/卡片网格 */
+.tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 16px; transition: transform .16s, box-shadow .16s, border-color .16s;
+  cursor: pointer; box-shadow: var(--shadow-sm);
+}
+.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+.tile .t-emoji { font-size: 22px; }
+.tile .t-name { font-weight: 650; font-size: 15px; margin-top: 8px; }
+.tile .t-meta { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.tile .t-prog { margin-top: 12px; }
+
+/* 标签 chips */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+  padding: 4px 11px; border-radius: 20px; background: var(--surface-3); color: var(--text-2);
+  border: 1px solid transparent; transition: all .15s; cursor: pointer;
+}
+.chip.active { background: var(--accent-soft); color: var(--accent); }
+.chip.cat { cursor: default; }
+
+/* 表格（客户） */
+.table { width: 100%; border-collapse: collapse; }
+.table th { text-align: left; font-size: 11.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.table td { padding: 13px 12px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+.table tr:hover td { background: var(--surface-2); }
+.table tr:last-child td { border-bottom: none; }
+
+/* 状态徽章 */
+.badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.badge.ok { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.badge.warn { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.badge.danger { background: color-mix(in srgb, var(--danger) 16%, transparent); color: var(--danger); }
+.badge.muted { background: var(--surface-3); color: var(--text-2); }
+.badge.info { background: color-mix(in srgb, var(--info) 16%, transparent); color: var(--info); }
+
+/* ---------- 创作中心 tabs ---------- */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.tab { padding: 8px 14px; border-radius: 11px; font-size: 13.5px; font-weight: 550; color: var(--text-2); background: var(--surface-2); border: 1px solid var(--border); transition: all .15s; }
+.tab:hover { color: var(--text); }
+.tab.active { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+/* 创作/灵感条目 */
+.entry {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 15px 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm); transition: border-color .15s;
+}
+.entry:hover { border-color: var(--border-strong); }
+.entry .e-top { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+.entry .e-title { font-weight: 650; font-size: 14.5px; }
+.entry .e-time { font-size: 11.5px; color: var(--muted); margin-left: auto; }
+.entry .e-body { font-size: 13.8px; color: var(--text-2); line-height: 1.6; white-space: pre-wrap; }
+.entry .e-actions { display: flex; gap: 8px; margin-top: 11px; }
+.entry .e-actions button { font-size: 12px; color: var(--muted); padding: 3px 8px; border-radius: 8px; }
+.entry .e-actions button:hover { background: var(--surface-3); color: var(--text); }
+
+/* ---------- 内容日历（看板） ---------- */
+.cal-board { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.cal-day { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; min-height: 150px; display: flex; flex-direction: column; }
+.cal-day.today { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.cal-day .cd-head { font-size: 12.5px; font-weight: 700; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.cal-day .cd-head .cd-num { color: var(--muted); font-weight: 600; }
+.cal-chip {
+  font-size: 12px; padding: 6px 8px; border-radius: 8px; margin-bottom: 7px; cursor: grab;
+  border-left: 3px solid var(--accent); background: var(--surface-2); line-height: 1.35;
+}
+.cal-chip:active { cursor: grabbing; }
+.cal-chip.dragging { opacity: .4; }
+.cal-chip.t-shoot { border-left-color: #ff6a3d; }
+.cal-chip.t-edit { border-left-color: #6c5ce7; }
+.cal-chip.t-post { border-left-color: #34c759; }
+.cal-chip.t-live { border-left-color: #ff2d55; }
+.cal-chip.t-course { border-left-color: #0a84ff; }
+.cal-chip.t-event { border-left-color: #ff9f0a; }
+.cal-add { font-size: 12px; color: var(--muted); padding: 5px; text-align: center; border-radius: 8px; border: 1px dashed var(--border-strong); margin-top: auto; }
+.cal-add:hover { color: var(--accent); border-color: var(--accent); }
+.cal-day.drop-hover { background: var(--accent-soft); }
+
+/* ---------- 成长中心 ---------- */
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.metric {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 16px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+}
+.metric .m-ico { font-size: 16px; }
+.metric .m-val { font-size: 26px; font-weight: 750; margin-top: 6px; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+.metric .m-label { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.metric .m-delta { font-size: 11.5px; font-weight: 600; margin-top: 6px; }
+.metric .m-delta.up { color: var(--ok); }
+.metric .m-delta.down { color: var(--danger); }
+.chart { display: flex; align-items: flex-end; gap: 8px; height: 140px; padding-top: 10px; }
+.bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+.bar { width: 100%; max-width: 34px; border-radius: 7px 7px 3px 3px; background: var(--accent-grad); transition: height .6s var(--ease); min-height: 4px; }
+.bar-lbl { font-size: 11px; color: var(--muted); }
+.summary-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; }
+.summary-box h4 { font-size: 14px; margin-bottom: 8px; }
+.summary-box p { font-size: 13.8px; color: var(--text-2); line-height: 1.7; }
+
+/* ---------- 晨间日记 ---------- */
+.q-card { margin-bottom: 16px; }
+.q-card .q-q { font-size: 15px; font-weight: 650; display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.q-card .q-q .q-emoji { font-size: 18px; }
+.mood-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.mood { font-size: 24px; padding: 6px; border-radius: 12px; cursor: pointer; filter: grayscale(.5); opacity: .6; transition: all .15s; }
+.mood:hover { opacity: 1; }
+.mood.sel { filter: none; opacity: 1; background: var(--accent-soft); transform: scale(1.08); }
+
+/* ---------- 设置 ---------- */
+.set-row { display: flex; align-items: center; gap: 14px; padding: 15px 0; border-bottom: 1px solid var(--border); }
+.set-row:last-child { border-bottom: none; }
+.set-row .s-ico { font-size: 19px; width: 26px; text-align: center; }
+.set-row .s-text { flex: 1; }
+.set-row .s-text .s-title { font-weight: 600; font-size: 14.5px; }
+.set-row .s-text .s-desc { font-size: 12.5px; color: var(--muted); }
+.toggle { width: 46px; height: 27px; border-radius: 20px; background: var(--surface-3); position: relative; transition: background .2s; flex-shrink: 0; }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 21px; height: 21px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s; }
+.toggle.on { background: var(--ok); }
+.toggle.on::after { transform: translateX(19px); }
+
+/* ---------- 空状态 ---------- */
+.empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+.empty .e-ico { font-size: 40px; opacity: .5; }
+.empty .e-txt { margin-top: 10px; font-size: 14px; }
+
+/* ---------- AI 面板 ---------- */
+.ai-panel {
+  background: var(--surface-2); border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow-y: auto; z-index: 35;
+  position: sticky; top: 0; height: 100dvh;
+  transition: transform .35s var(--ease), opacity .3s;
+}
+.ai-header { display: flex; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.ai-title { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 9px; }
+.ai-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 22%, transparent); }
+.ai-close { margin-left: auto; display: none; }
+.ai-context { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.ai-context .ac-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.ac-suggest { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 13px; margin-bottom: 9px; font-size: 13.3px; line-height: 1.55; }
+.ac-suggest .acs-h { font-weight: 650; display: flex; gap: 7px; align-items: center; margin-bottom: 4px; }
+.ac-suggest .acs-tip { color: var(--text-2); }
+.ac-quick { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.ac-quick .chip { cursor: pointer; }
+.ai-messages { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 90%; padding: 11px 14px; border-radius: 16px; font-size: 13.8px; line-height: 1.6; animation: fade .3s var(--ease); }
+.msg.ai { align-self: flex-start; background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 5px; }
+.msg.me { align-self: flex-end; background: var(--accent-grad); color: #fff; border-bottom-right-radius: 5px; }
+.msg.ai .m-role { font-size: 10.5px; color: var(--accent); font-weight: 700; letter-spacing: .5px; margin-bottom: 4px; }
+.ai-input { display: flex; gap: 9px; padding: 14px 16px; border-top: 1px solid var(--border); }
+.ai-input input { flex: 1; padding: 11px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+.ai-input input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.ai-send { width: 42px; border-radius: 14px; background: var(--accent-grad); color: #fff; font-size: 15px; flex-shrink: 0; }
+.ai-send:active { transform: scale(.93); }
+.typing { display: inline-flex; gap: 4px; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
+.typing i:nth-child(2){ animation-delay: .2s; } .typing i:nth-child(3){ animation-delay: .4s; }
+@keyframes blink { 0%,60%,100%{ opacity:.3; transform: translateY(0);} 30%{ opacity:1; transform: translateY(-3px);} }
+
+/* ---------- 浮动 AI 按钮（移动端） ---------- */
+.fab-ai {
+  position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom));
+  width: 56px; height: 56px; border-radius: 50%; background: var(--accent-grad); color: #fff;
+  font-size: 24px; box-shadow: 0 10px 30px rgba(255,94,126,.45); display: none;
+  z-index: 45; align-items: center; justify-content: center;
+}
+.fab-ai:active { transform: scale(.92); }
+
+/* ---------- 遮罩 ---------- */
+.backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 38; }
+.backdrop.show { opacity: 1; pointer-events: auto; }
+
+/* ---------- 模态框 ---------- */
+.modal-wrap { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 60; padding: 20px; background: rgba(0,0,0,.45); }
+.modal-wrap.show { display: flex; }
+.modal { background: var(--surface); border-radius: 20px; width: 100%; max-width: 520px; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: pop .3s var(--ease); }
+@keyframes pop { from { opacity:0; transform: scale(.94) translateY(10px);} to { opacity:1; transform: none;} }
+.modal-head { display: flex; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 1; }
+.modal-head h3 { font-size: 16.5px; font-weight: 700; }
+.modal-head .icon-btn { margin-left: auto; }
+.modal-body { padding: 20px 22px; }
+.modal-foot { padding: 16px 22px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+.form-grid { display: grid; gap: 14px; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1180px) {
+  .app { grid-template-columns: var(--sidebar-w) 1fr; }
+  .ai-panel { position: fixed; right: 0; top: 0; bottom: 0; width: min(380px, 88vw); transform: translateX(100%); opacity: 1; pointer-events: auto; box-shadow: var(--shadow-lg); }
+  .app.ai-hidden .ai-panel { transform: translateX(100%); }
+  .app:not(.ai-hidden) .ai-panel { transform: translateX(0); }
+  .ai-close { display: grid; }
+  .fab-ai { display: flex; }
+  .ai-toggle { display: none; }
+}
+@media (max-width: 860px) {
+  .grid-2, .grid-3, .metric-grid { grid-template-columns: 1fr; }
+  .cal-board { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 268px;
+    transform: translateX(-100%); transition: transform .32s var(--ease);
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .app, .app.ai-hidden { grid-template-columns: 1fr; }
+  .menu-btn { display: grid; }
+  .topbar { padding: 14px 16px; }
+  .content { padding: 18px 16px calc(80px + env(safe-area-inset-bottom)); }
+  .hero { padding: 22px 20px; }
+  .hero h2 { font-size: 22px; }
+  .tomorrow-hide { display: none; }
+  .cal-board { grid-template-columns: 1fr; }
+}
+@media (min-width: 721px) { .sidebar { transform: none !important; } }
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+</style>
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 100 100&#39;&gt;&lt;text y=&#39;.9em&#39; font-size=&#39;90&#39;&gt;%E2%97%90&lt;/text&gt;&lt;/svg&gt;">
+</head>
+<body>
+  <div class="app">
+    <!-- ───────── 左侧导航（固定） ───────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo">◐</div>
+        <div class="brand-text">
+          <div class="brand-name">Creator OS</div>
+          <div class="brand-sub" id="brandSub">你的创作工作流</div>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav"><div class="nav-group-label">工作流</div><button class="nav-item active" data-key="home"><span class="nav-step"></span><span class="nav-ico">🏠</span><span>今天</span></button><button class="nav-item" data-key="journal"><span class="nav-step"></span><span class="nav-ico">✍️</span><span>晨间日记</span></button><button class="nav-item" data-key="inspiration"><span class="nav-step"></span><span class="nav-ico">🧠</span><span>灵感库</span><span class="nav-badge dot"></span></button><button class="nav-item" data-key="create"><span class="nav-step"></span><span class="nav-ico">🎬</span><span>创作中心</span></button><button class="nav-item" data-key="work"><span class="nav-step"></span><span class="nav-ico">📁</span><span>工作空间</span><span class="nav-badge">7</span></button><button class="nav-item" data-key="clients"><span class="nav-step"></span><span class="nav-ico">👥</span><span>客户管理</span><span class="nav-badge">1</span></button><button class="nav-item" data-key="calendar"><span class="nav-step"></span><span class="nav-ico">📅</span><span>内容日历</span></button><button class="nav-item" data-key="growth"><span class="nav-step"></span><span class="nav-ico">📊</span><span>成长中心</span></button><div class="nav-group-label">知识 &amp; 系统</div><button class="nav-item" data-key="learn"><span class="nav-step"></span><span class="nav-ico">📚</span><span>学习中心</span></button><button class="nav-item" data-key="settings"><span class="nav-step"></span><span class="nav-ico">⚙️</span><span>设置</span></button></nav>
+
+      <div class="sidebar-footer">
+        <div class="streak-mini" id="streakMini">
+          <span class="flame">🔥</span>
+          <span><b id="streakNum">23</b> 天连续创作</span>
+        </div>
+        <button class="user-chip" id="openSettings" title="设置">
+          <span class="avatar" id="userAvatar">雯</span>
+          <span class="user-name" id="userName">雯双</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ───────── 主内容区 ───────── -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+        <div class="topbar-title">
+          <h1 id="pageTitle">今天</h1>
+          <p id="pageSub" class="topbar-sub">你今天的状态与节奏</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="todayBtn" title="回到今天">🏠</button>
+          <button class="icon-btn ai-toggle" id="aiBtn" title="AI 助手">✨</button>
+        </div>
+      </header>
+
+      <div class="content" id="content"><div class="content-inner page-fade">
+        <div class="hero">
+          <div class="hero-row">
+            <div><h2>早安，雯双 👋</h2><div class="greet-sub">周五 · 7 月 24 日 · 又是创作的一天</div></div>
+            <div class="weather"><div class="wt">✨</div><div class="wd">清爽 24° · 上海</div></div>
+          </div>
+          <div class="hero-meta">
+            <div class="hm"><div class="v">🔥 23</div><div class="k">连续创作</div></div>
+            <div class="hm"><div class="v">✍️ 8</div><div class="k">连续日记</div></div>
+            <div class="hm"><div class="v">📁 7</div><div class="k">进行中项目</div></div>
+            <div class="hm"><div class="v">🧠 4</div><div class="k">灵感</div></div>
+          </div>
+        </div>
+
+        <div class="compass">
+          <div class="c-label">🌱 今日指南针</div>
+          <div class="c-text" id="guidepostText">今天先完成自己的内容，再处理客户工作。因为你已经连续三天没有更新个人 IP 了。</div>
+          <button class="btn btn-sm btn-ghost c-edit" data-act="editGuide">✏️ 改写我的指南针</button>
+        </div>
+
+        <div class="section-label">🎯 今日节奏</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">🎯</span><h2>今日最重要的三件事</h2></div>
+            <div class="prio-item " data-id="jk3qunr"><div class="check " data-act="prioToggle" data-id="jk3qunr"></div><div class="ptext" data-act="prioEdit" data-id="jk3qunr" contenteditable="true" suppresscontenteditablewarning="">完成 Creator IP 本周视频脚本</div><button class="del" data-act="prioDel" data-id="jk3qunr">🗑</button></div><div class="prio-item done" data-id="lguyi62"><div class="check done" data-act="prioToggle" data-id="lguyi62"></div><div class="ptext" data-act="prioEdit" data-id="lguyi62" contenteditable="true" suppresscontenteditablewarning="">回复 PM Catering 的修改意见</div><button class="del" data-act="prioDel" data-id="lguyi62">🗑</button></div><div class="prio-item " data-id="s71fy2m"><div class="check " data-act="prioToggle" data-id="s71fy2m"></div><div class="ptext" data-act="prioEdit" data-id="s71fy2m" contenteditable="true" suppresscontenteditablewarning="">录制冰皮课程第 3 节</div><button class="del" data-act="prioDel" data-id="s71fy2m">🗑</button></div>
+            <input class="input" id="prioInput" placeholder="添加一件事，回车确认…" style="margin-top:10px">
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">⏰</span><h2>今日时间安排</h2></div>
+            <div class="sched-item"><div class="sched-time">09:00</div><div class="sched-dot" style="background:var(--accent)"></div><div class="sched-body"><div class="st">晨间日记 + 写脚本</div><div class="sd">个人 IP · 创作中心</div></div></div><div class="sched-item"><div class="sched-time">11:30</div><div class="sched-dot" style="background:var(--accent-2)"></div><div class="sched-body"><div class="st">PM Catering 会议</div><div class="sd">沟通月饼礼盒拍摄</div></div></div><div class="sched-item"><div class="sched-time">15:00</div><div class="sched-dot" style="background:var(--ok)"></div><div class="sched-body"><div class="st">冰皮课程录制</div><div class="sd">第 3 节 · 拍摄棚</div></div></div><div class="sched-item"><div class="sched-time">20:00</div><div class="sched-dot" style="background:var(--danger)"></div><div class="sched-body"><div class="st">直播答疑</div><div class="sd">粉丝群 · 30 分钟</div></div></div>
+          </div>
+        </div>
+
+        <div class="section-label">🤖 与 AI 同行</div>
+        <div class="ai-suggest">
+          <div class="ai-glow"></div>
+          <h3>🤖 AI 今日建议</h3>
+          <ul><li><span>🎯 先吃掉最难的青蛙</span><span>你今天还有 2 件重要的事没勾掉，建议从「完成 Creator IP 本周视频脚本」开始。</span></li><li><span>🧠 个人 IP 在等你</span><span>你已连续 3 天没更新个人内容，今天至少发一条。客户重要，但你的 IP 才是资产。</span></li><li><span>⏰ 留意时间块</span><span>下午 3 点有冰皮课程录制，上午留 2 小时给脚本创作最专注。</span></li></ul>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">💡</span><h2>快速记录</h2><span class="ch-sub">想到就写</span></div>
+            <div id="notesList"><div class="entry" style="margin:0 0 8px"><div class="e-body">想到一个关于「创作者焦虑」的选题</div></div></div>
+            <input class="input" id="noteInput" placeholder="闪过的念头…回车保存" style="margin-top:8px">
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">📌</span><h2>最近进行中的项目</h2><span class="ch-sub">点开看详情</span></div>
+            <div class="stack" style="gap:10px"><div class="tile" data-act="openWork" data-id="j8ffykn"><div class="t-emoji">🍰</div><div class="t-name">PM Catering</div><div class="t-meta">1/3 待办</div><div class="t-prog progress"><i style="width:33%"></i></div></div><div class="tile" data-act="openWork" data-id="qv3xgtx"><div class="t-emoji">🌟</div><div class="t-name">Creator IP</div><div class="t-meta">1/3 待办</div><div class="t-prog progress"><i style="width:33%"></i></div></div><div class="tile" data-act="openWork" data-id="4j1woux"><div class="t-emoji">🌙</div><div class="t-name">迪拜月饼课程</div><div class="t-meta">1/2 待办</div><div class="t-prog progress"><i style="width:50%"></i></div></div><div class="tile" data-act="openWork" data-id="jm1xcc3"><div class="t-emoji">🍡</div><div class="t-name">冰皮课程</div><div class="t-meta">0/2 待办</div><div class="t-prog progress"><i style="width:0%"></i></div></div></div>
+          </div>
+        </div>
+
+        <div class="section-label">🧭 你的工作流</div>
+        <div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="chip cat">🏠 今天</span><span style="color:var(--muted)">→</span><span class="chip cat">✍️ 思考</span><span style="color:var(--muted)">→</span><span class="chip cat">🧠 收集</span><span style="color:var(--muted)">→</span><span class="chip cat">🎬 创作</span><span style="color:var(--muted)">→</span><span class="chip cat">📁 执行</span><span style="color:var(--muted)">→</span><span class="chip cat">👥 交付</span><span style="color:var(--muted)">→</span><span class="chip cat">📊 复盘</span></div>
+      </div></div>
+    </main>
+
+    <!-- ───────── 右侧 AI 助手 ───────── -->
+    <aside class="ai-panel" id="aiPanel">
+      <div class="ai-header">
+        <div class="ai-title"><span class="ai-dot"></span> AI 助手</div>
+        <button class="icon-btn ai-close" id="aiClose" aria-label="收起">✕</button>
+      </div>
+      <div class="ai-context" id="aiContext"><div class="ac-title">AI 今日建议</div><div class="ac-suggest"><div class="acs-h">🎯 先吃掉最难的青蛙</div><div class="acs-tip">你今天还有 2 件重要的事没勾掉，建议从「完成 Creator IP 本周视频脚本」开始。</div></div><div class="ac-suggest"><div class="acs-h">🧠 个人 IP 在等你</div><div class="acs-tip">你已连续 3 天没更新个人内容，今天至少发一条。客户重要，但你的 IP 才是资产。</div></div><div class="ac-suggest"><div class="acs-h">⏰ 留意时间块</div><div class="acs-tip">下午 3 点有冰皮课程录制，上午留 2 小时给脚本创作最专注。</div></div><div class="ac-quick"><span class="chip" data-aiq="推荐标题">推荐标题</span><span class="chip" data-aiq="写个 Hook">写个 Hook</span><span class="chip" data-aiq="整理灵感">整理灵感</span><span class="chip" data-aiq="今日安排">今日安排</span><span class="chip" data-aiq="帮我复盘">帮我复盘</span></div></div>
+      <div class="ai-messages" id="aiMessages"><!-- 对话 --><div class="msg ai"><div class="m-role">AI 助手</div>嗨 雯双，我是你的创作助手 ✨
+我在「今天」页面，随时帮你出标题、理灵感、看数据。</div></div>
+      <form class="ai-input" id="aiForm">
+        <input id="aiInput" type="text" placeholder="问问 AI，或发一句指令…" autocomplete="off">
+        <button type="submit" class="ai-send" aria-label="发送">➤</button>
+      </form>
+    </aside>
+  </div>
+
+  <div class="backdrop" id="backdrop"></div>
+  <button class="fab-ai" id="fabAi" aria-label="AI 助手">✨</button>
+
+  <script>
+/* =========================================================
+   Creator OS · 应用逻辑（纯前端 / 本地持久化 / 上下文 AI）
+   ========================================================= */
+(function () {
+  "use strict";
+
+  /* ---------------- 工具 ---------------- */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const uid = () => Math.random().toString(36).slice(2, 9);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const pad = (n) => String(n).padStart(2, "0");
+  const dKey = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const md = (d) => `${d.getMonth() + 1}/${d.getDate()}`;
+  const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const WEEK = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+  const weekDays = () => {
+    const now = today(); const mon = addDays(now, 1 - (now.getDay() || 7));
+    return Array.from({ length: 7 }, (_, i) => { const d = addDays(mon, i); return { d, label: WEEK[d.getDay()], num: d.getDate(), key: dKey(d), isToday: dKey(d) === dKey(now) }; });
+  };
+  const fmtNum = (n) => (n >= 10000 ? (n / 10000).toFixed(1) + "w" : n >= 1000 ? (n / 1000).toFixed(1) + "k" : String(n));
+
+  /* ---------------- 常量 ---------------- */
+  const INSP_CATS = ["观点", "故事", "生活", "客户", "营销", "AI", "商业", "看到的案例", "看到的广告", "突然想到的内容", "语录", "待研究"];
+  const CREATE_TYPES = ["脚本", "标题库", "开场Hook", "结尾CTA", "文案", "封面标题", "已发布"];
+  const LEARN_CATS = ["读书笔记", "课程", "AI", "营销", "运营", "摄影", "播音", "表达", "收藏文章"];
+  const CAL_TYPES = [
+    { k: "shoot", label: "拍摄", cls: "t-shoot" }, { k: "edit", label: "剪辑", cls: "t-edit" },
+    { k: "post", label: "发布", cls: "t-post" }, { k: "live", label: "直播", cls: "t-live" },
+    { k: "course", label: "课程", cls: "t-course" }, { k: "event", label: "活动", cls: "t-event" },
+  ];
+  const MOODS = ["😊", "😌", "😐", "😟", "😴", "🔥", "🌧️", "✨"];
+
+  const GROUPS = [
+    { label: "工作流", items: [
+      { key: "home", ico: "🏠", name: "今天", sub: "每天的第一眼" },
+      { key: "journal", ico: "✍️", name: "晨间日记", sub: "思考" },
+      { key: "inspiration", ico: "🧠", name: "灵感库", sub: "收集" },
+      { key: "create", ico: "🎬", name: "创作中心", sub: "创作" },
+      { key: "work", ico: "📁", name: "工作空间", sub: "执行" },
+      { key: "clients", ico: "👥", name: "客户管理", sub: "交付" },
+      { key: "calendar", ico: "📅", name: "内容日历" },
+      { key: "growth", ico: "📊", name: "成长中心", sub: "复盘" },
+    ]},
+    { label: "知识 & 系统", items: [
+      { key: "learn", ico: "📚", name: "学习中心" },
+      { key: "settings", ico: "⚙️", name: "设置" },
+    ]},
+  ];
+  const NAV = GROUPS.flatMap((g) => g.items);
+  const PAGE_META = {
+    home: { t: "今天", s: "你今天的状态与节奏" },
+    journal: { t: "晨间日记", s: "每天回答几个问题，让 AI 帮你复盘" },
+    inspiration: { t: "灵感库", s: "所有灵感都放这里，AI 帮你整理" },
+    create: { t: "创作中心", s: "脚本 · 标题 · Hook · 文案 · 已发布" },
+    work: { t: "工作空间", s: "以项目为单位推进你的事业" },
+    clients: { t: "客户管理", s: "找客户，再也不用翻微信" },
+    calendar: { t: "内容日历", s: "拍什么 · 剪什么 · 发什么，全部拖拉" },
+    growth: { t: "成长中心", s: "数据会说话，AI 帮你看见趋势" },
+    learn: { t: "学习中心", s: "你的私人知识库" },
+    settings: { t: "设置", s: "账号 · 主题 · 同步 · AI" },
+  };
+
+  /* ---------------- 种子数据 ---------------- */
+  function seed() {
+    const t = today();
+    const met = {};
+    const samples = [
+      [4200, 320, 88, 140, 35, 1, 0, 2800], [5100, 410, 102, 165, 52, 0, 1, 0],
+      [3800, 290, 76, 120, 28, 2, 1, 5600], [6200, 520, 131, 210, 73, 1, 0, 0],
+      [5900, 480, 119, 195, 61, 0, 1, 3200], [7100, 610, 150, 240, 88, 1, 0, 0],
+    ];
+    for (let i = 6; i >= 0; i--) {
+      const d = addDays(t, -i); const s = samples[6 - i] || samples[0];
+      met[dKey(d)] = { plays: s[0], likes: s[1], comments: s[2], favorites: s[3], fans: s[4], deals: s[5], clients: s[6], income: s[7] };
+    }
+    return {
+      user: { name: "雯双", avatar: "雯", city: "上海" },
+      theme: "light", aiOn: true,
+      guidepost: "今天先完成自己的内容，再处理客户工作。因为你已经连续三天没有更新个人 IP 了。",
+      priorities: [
+        { id: uid(), text: "完成 Creator IP 本周视频脚本", done: false },
+        { id: uid(), text: "回复 PM Catering 的修改意见", done: true },
+        { id: uid(), text: "录制冰皮课程第 3 节", done: false },
+      ],
+      quickNotes: [{ id: uid(), text: "想到一个关于「创作者焦虑」的选题", t: addDays(t, 0) }],
+      schedule: [
+        { id: uid(), time: "09:00", title: "晨间日记 + 写脚本", desc: "个人 IP · 创作中心", color: "var(--accent)" },
+        { id: uid(), time: "11:30", title: "PM Catering 会议", desc: "沟通月饼礼盒拍摄", color: "var(--accent-2)" },
+        { id: uid(), time: "15:00", title: "冰皮课程录制", desc: "第 3 节 · 拍摄棚", color: "var(--ok)" },
+        { id: uid(), time: "20:00", title: "直播答疑", desc: "粉丝群 · 30 分钟", color: "var(--danger)" },
+      ],
+      projects: [
+        { id: uid(), emoji: "🍰", name: "PM Catering", desc: "为高端餐饮品牌定制月饼礼盒宣传视频", todos: [{ text: "确认分镜脚本", done: true }, { text: "拍摄日排期", done: false }, { text: "初剪交付", done: false }], color: "#ff6a3d" },
+        { id: uid(), emoji: "🌟", name: "Creator IP", desc: "个人品牌内容矩阵，每周 3 条", todos: [{ text: "本周选题会", done: true }, { text: "脚本 x3", done: false }, { text: "拍摄", done: false }], color: "#6c5ce7" },
+        { id: uid(), emoji: "🌙", name: "迪拜月饼课程", desc: "面向海外华人的线上课程", todos: [{ text: "大纲定稿", done: true }, { text: "录制 5 节", done: false }], color: "#0a84ff" },
+        { id: uid(), emoji: "🍡", name: "冰皮课程", desc: "中式点心教学系列", todos: [{ text: "第 3 节录制", done: false }, { text: "封面设计", done: false }], color: "#34c759" },
+        { id: uid(), emoji: "🎁", name: "伴手礼", desc: "节日礼盒联名企划", todos: [{ text: "供应商比价", done: false }], color: "#ff9f0a" },
+        { id: uid(), emoji: "🎓", name: "武汉大学", desc: "校园品牌合作项目", todos: [{ text: "提案准备", done: true }], color: "#ff2d55" },
+        { id: uid(), emoji: "🚀", name: "未来产品", desc: "自有品牌孵化（保密）", todos: [{ text: "市场调研", done: false }], color: "#8b5cf6" },
+      ],
+      inspirations: [
+        { id: uid(), category: "观点", text: "「创作者最大的敌人不是算法，是自己的完美主义。」", t: addDays(t, -1) },
+        { id: uid(), category: "故事", text: "一个客户从怀疑到续约的真实转变，可以做成案例视频", t: addDays(t, -2) },
+        { id: uid(), category: "AI", text: "试试用 AI 生成 10 个标题再人工筛选，效率翻倍", t: addDays(t, 0) },
+        { id: uid(), category: "看到的广告", text: "某咖啡品牌的极简海报，配色值得收藏", t: addDays(t, -3) },
+      ],
+      creations: [
+        { id: uid(), type: "脚本", title: "《为什么你越努力越焦虑》", content: "开场：一个创作者的真实一天…", platform: "视频号", duration: "6:30", status: "草稿" },
+        { id: uid(), type: "标题库", title: "10 个让人想点开的标题", content: "1. 我停更 30 天后悟了… 2. 别再假装努力", platform: "", duration: "", status: "草稿" },
+        { id: uid(), type: "开场Hook", title: "Hook：先抛反常识结论", content: "「我劝你今年别做账号。」——停顿 2 秒", platform: "", duration: "", status: "可用" },
+        { id: uid(), type: "已发布", title: "《创作者的时间管理》", content: "发布于视频号，数据表现稳定", platform: "视频号", duration: "5:12", status: "已发布" },
+      ],
+      clients: [
+        { id: uid(), name: "PM Catering", owner: "雯双", quote: "¥38,000", pay: "已付定金", videos: 3, due: md(addDays(t, 2)), comms: [{ t: md(addDays(t, -1)), text: "客户希望加入更多产品特写" }], history: "2024 Q3 启动，已交付 2 条" },
+        { id: uid(), name: "武汉大学", owner: "助理小林", quote: "¥15,000", pay: "待付款", videos: 1, due: md(addDays(t, 6)), comms: [{ t: md(addDays(t, -3)), text: "等待校方审批提案" }], history: "校园品牌合作" },
+        { id: uid(), name: "伴手礼联名", owner: "雯双", quote: "¥22,000", pay: "已结清", videos: 2, due: md(addDays(t, -4)), comms: [{ t: md(addDays(t, -10)), text: "项目完结，客户很满意" }], history: "节日联名，已完结" },
+      ],
+      calendar: [
+        { id: uid(), type: "shoot", title: "PM Catering 拍摄", day: 0 },
+        { id: uid(), type: "edit", title: "Creator IP 初剪", day: 1 },
+        { id: uid(), type: "post", title: "发布《时间管理》", day: 2 },
+        { id: uid(), type: "live", title: "粉丝直播答疑", day: 0 },
+        { id: uid(), type: "course", title: "冰皮课程第 3 节", day: 3 },
+        { id: uid(), type: "event", title: "武汉大学提案", day: 4 },
+      ],
+      learn: [
+        { id: uid(), category: "读书笔记", title: "《纳瓦尔宝典》", content: "杠杆：用代码与媒体放大你的判断。", t: addDays(t, -2) },
+        { id: uid(), category: "AI", title: "Prompt 工程笔记", content: "角色 + 任务 + 约束 + 示例，四要素最稳。", t: addDays(t, -1) },
+        { id: uid(), category: "营销", title: "私域转化漏斗", content: "曝光 → 关注 → 信任 → 成交，每一步都要可量化。", t: addDays(t, 0) },
+      ],
+      journal: {},
+      metrics: met,
+      streak: { create: 23, journal: 8 },
+    };
+  }
+
+  /* ---------------- 状态 ---------------- */
+  const KEY = "cos_state_v1";
+  let state = load();
+  function load() {
+    try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch (e) {}
+    const s = seed(); save(s); return s;
+  }
+  function save(s = state) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+
+  /* ---------------- AI 上下文与回复 ---------------- */
+  function buildSuggestions(page) {
+    const s = state;
+    if (page === "home") {
+      const undone = s.priorities.filter((p) => !p.done).length;
+      const tips = [
+        { h: "🎯 先吃掉最难的青蛙", t: undone ? `你今天还有 ${undone} 件重要的事没勾掉，建议从「${s.priorities.find((p) => !p.done)?.text || "第一件事"}」开始。` : "今天的三件事都完成了，给自己一个赞。" },
+        { h: "🧠 个人 IP 在等你", t: "你已连续 3 天没更新个人内容，今天至少发一条。客户重要，但你的 IP 才是资产。" },
+        { h: "⏰ 留意时间块", t: "下午 3 点有冰皮课程录制，上午留 2 小时给脚本创作最专注。" },
+      ];
+      return { title: "AI 今日建议", items: tips };
+    }
+    if (page === "journal") return { title: "AI 晨间陪伴", items: [
+      { h: "🌅 慢慢来", t: "不用写长篇，先凭直觉填完 5 个问题，晚间我会帮你做复盘。" },
+      { h: "🧠 脑中三件事", t: "把最吵的三件事写下来，它们一旦被看见，就不会一直占用你的大脑内存。" },
+    ]};
+    if (page === "inspiration") {
+      const cats = {};
+      s.inspirations.forEach((i) => (cats[i.category] = (cats[i.category] || 0) + 1));
+      const top = Object.entries(cats).sort((a, b) => b[1] - a[1])[0];
+      return { title: "AI 灵感整理", items: [
+        { h: "🗂️ 自动归类", t: `你已有 ${s.inspirations.length} 条灵感${top ? `，其中「${top[0]}」最多` : ""}。想到什么直接写，我帮你归到正确分类。` },
+        { h: "🔗 建议合并", t: "「观点」和「AI」里各有 1 条都提到效率，要不要合成一个选题？" },
+      ]};
+    }
+    if (page === "create") return { title: "AI 创作助手", items: [
+      { h: "🏷️ 推荐标题", t: "根据近期热点，试试：「我停更 30 天，反而涨了粉」这类反直觉标题。" },
+      { h: "🎣 推荐 Hook", t: "前 3 秒抛一个让人不舒服的真相，完播率通常更高。" },
+      { h: "⏱️ 预计完播", t: "6 分钟内的干货视频完播最好，超过 8 分钟建议拆成上下集。" },
+    ]};
+    if (page === "work") {
+      const soon = [...s.projects].sort((a, b) => 0)[0];
+      return { title: "AI 项目提醒", items: [
+        { h: "⏳ 距离截止还有 2 天", t: "PM Catering 的初剪建议今天完成，避免周末赶工。" },
+        { h: "✅ 推进建议", t: "Creator IP 的脚本还没写，这是你个人资产，优先排期。" },
+      ]};
+    }
+    if (page === "clients") return { title: "AI 客户洞察", items: [
+      { h: "💸 待付款提醒", t: "武汉大学还有 ¥15,000 待付款，记得跟进审批进度。" },
+      { h: "🤝 续约信号", t: "PM Catering 沟通顺畅，可主动提议季度套餐，提高客单价。" },
+    ]};
+    if (page === "calendar") return { title: "AI 排期助手", items: [
+      { h: "📅 今天拍什么", t: "PM Catering 拍摄 + 粉丝直播，记得提前充电、清内存。" },
+      { h: "✂️ 今天剪什么", t: "把昨天的素材先粗剪一版，发布不赶今晚。" },
+    ]};
+    if (page === "growth") {
+      const m = s.metrics[dKey(today())] || {};
+      return { title: "AI 数据解读", items: [
+        { h: "📈 今日概览", t: `播放 ${fmtNum(m.plays || 0)} · 新增粉丝 ${m.fans || 0} · 今日收入 ¥${m.income || 0}。` },
+        { h: "🔍 趋势", t: "本周播放稳步上升，完播率高的都是 6 分钟内的干货，继续保持这个节奏。" },
+      ]};
+    }
+    if (page === "learn") return { title: "AI 学习教练", items: [
+      { h: "📚 复习建议", t: "你 2 天前读了《纳瓦尔宝典》，今天可以花 10 分钟回顾「杠杆」那一节。" },
+      { h: "✍️ 输出倒逼输入", t: "把最近学到的营销知识，写成一条短视频文案，记忆会更牢。" },
+    ]};
+    return { title: "AI 助手", items: [{ h: "👋 你好", t: "我是你的创作助手，随时问我标题、灵感、排期或复盘。" }] };
+  }
+
+  function aiReply(input, page) {
+    const s = state; const q = input.toLowerCase();
+    const has = (...k) => k.some((x) => q.includes(x.toLowerCase()));
+    if (has("标题", "起名", "名字", "title")) {
+      return "给你 5 个可点的标题方向：\n1. 我停更 30 天，反而涨了 2000 粉\n2. 别再假装努力了，创作者最怕这个\n3. 一条视频救活我的人生\n4. 为什么越努力越焦虑\n5. 普通人做账号的 3 个真相\n想围绕哪个展开，我帮你写脚本。";
+    }
+    if (has("hook", "开场", "开头")) {
+      return "高完播的开场通常三选一：\n▹ 反常识：「我劝你今年别做账号。」\n▹ 痛点：「你是不是也越努力越焦虑？」\n▹ 悬念：「接下来这件事，会推翻你今天的计划。」\n记得说完停顿 2 秒，再接正文。";
+    }
+    if (has("灵感", "idea", "选题")) {
+      const n = s.inspirations.length;
+      return `你灵感库现在有 ${n} 条。其中「AI」和「观点」都提到了效率，建议合并成一个选题：《用 AI 把我的创作效率翻了倍》。要我帮你起草吗？`;
+    }
+    if (has("截止", "deadline", "项目", "排期", "进度")) {
+      const p = s.projects[0];
+      return `目前进行中的项目有 ${s.projects.length} 个。PM Catering 距离初剪还剩 2 天，建议今天推进；Creator IP 的脚本还没动，它是你的个人资产，优先排期。`;
+    }
+    if (has("复盘", "数据", "增长", "播放", "粉丝")) {
+      const m = s.metrics[dKey(today())] || {};
+      return `今日：播放 ${fmtNum(m.plays || 0)}、点赞 ${m.likes || 0}、新增粉丝 ${m.fans || 0}、收入 ¥${m.income || 0}。\n趋势：本周播放稳步上升，6 分钟内的干货完播最好。建议继续保持「短而密」的更新节奏。`;
+    }
+    if (has("客户", "报价", "付款", "续约")) {
+      return `你管理着 ${s.clients.length} 个客户。武汉大学还有 ¥15,000 待付款，建议跟进；PM Catering 沟通顺畅，可主动推季度套餐提高客单价。`;
+    }
+    if (has("日记", "心情", "焦虑", "累")) {
+      return "先深呼吸。把脑中最吵的三件事写进晨间日记，它们一旦被写下来，就没那么吵了。今天不用完美，先完成，再完美。🌱";
+    }
+    if (has("计划", "今天", "安排", "做什么")) {
+      const first = s.priorities.find((p) => !p.done);
+      return `今天的三件事里，最该先做的是：「${first ? first.text : "写一条个人 IP 内容"}」。上午精力最好，留给创作；客户和会议放在下午。`;
+    }
+    if (has("指南针", "原则", "提醒自己")) {
+      return "你的今日指南针是：" + (s.guidepost || "先完成自己的内容，再处理客户。") + "\n需要我帮你改写得更坚定一点吗？";
+    }
+    const pageName = PAGE_META[page] ? PAGE_META[page].t : "这里";
+    return `我在「${pageName}」页面。你可以问我：推荐标题 / 写个 Hook / 整理灵感 / 项目排期 / 数据复盘。也可以直接说你想做的创作，我来帮你落地。`;
+  }
+
+  /* ---------------- 天气（示例数据，可按城市刷新） ---------------- */
+  function weather() {
+    const conds = [["🌤️", "局部多云", 23], ["☀️", "晴", 26], ["⛅", "多云", 21], ["🌧️", "小雨", 18], ["✨", "清爽", 24]];
+    const i = today().getDate() % conds.length;
+    return { ico: conds[i][0], txt: conds[i][1], temp: conds[i][2], city: state.user.city };
+  }
+
+  /* ---------------- 模态框 ---------------- */
+  const modalWrap = document.createElement("div");
+  modalWrap.className = "modal-wrap"; document.body.appendChild(modalWrap);
+  function openModal(title, bodyHtml, onMount) {
+    modalWrap.innerHTML = `<div class="modal"><div class="modal-head"><h3>${esc(title)}</h3><button class="icon-btn modal-close" data-close>✕</button></div><div class="modal-body">${bodyHtml}</div></div>`;
+    modalWrap.classList.add("show");
+    const close = () => modalWrap.classList.remove("show");
+    modalWrap.onclick = (e) => { if (e.target === modalWrap || e.target.closest("[data-close]")) close(); };
+    if (onMount) onMount(modalWrap, close);
+    return close;
+  }
+
+  /* ---------------- 渲染：导航 ---------------- */
+  function renderNav() {
+    const nav = $("#nav"); nav.innerHTML = "";
+    GROUPS.forEach((g) => {
+      const lbl = document.createElement("div"); lbl.className = "nav-group-label"; lbl.textContent = g.label; nav.appendChild(lbl);
+      g.items.forEach((it) => {
+        const a = document.createElement("button");
+        a.className = "nav-item" + (it.key === state._page ? " active" : "");
+        a.dataset.key = it.key;
+        let badge = "";
+        if (it.key === "work") badge = `<span class="nav-badge">${state.projects.length}</span>`;
+        else if (it.key === "clients") { const up = state.clients.filter((c) => c.pay.includes("待")).length; if (up) badge = `<span class="nav-badge">${up}</span>`; }
+        else if (it.key === "inspiration") badge = `<span class="nav-badge dot"></span>`;
+        a.innerHTML = `<span class="nav-step"></span><span class="nav-ico">${it.ico}</span><span>${esc(it.name)}</span>${badge}`;
+        a.onclick = () => navigate(it.key);
+        nav.appendChild(a);
+      });
+    });
+    $("#streakNum").textContent = state.streak.create;
+    $("#userName").textContent = state.user.name;
+    $("#userAvatar").textContent = state.user.avatar;
+    $("#brandSub").textContent = "你的创作工作流";
+  }
+
+  /* ---------------- 渲染：页面 ---------------- */
+  const PAGES = {
+    home() {
+      const w = weather(); const d = today();
+      const sched = state.schedule.map((s) => `<div class="sched-item"><div class="sched-time">${esc(s.time)}</div><div class="sched-dot" style="background:${s.color}"></div><div class="sched-body"><div class="st">${esc(s.title)}</div><div class="sd">${esc(s.desc || "")}</div></div></div>`).join("");
+      const prio = state.priorities.map((p) => `<div class="prio-item ${p.done ? "done" : ""}" data-id="${p.id}"><div class="check ${p.done ? "done" : ""}" data-act="prioToggle" data-id="${p.id}"></div><div class="ptext" data-act="prioEdit" data-id="${p.id}" contenteditable="true" suppresscontenteditablewarning>${esc(p.text)}</div><button class="del" data-act="prioDel" data-id="${p.id}">🗑</button></div>`).join("");
+      const notes = state.quickNotes.map((n) => `<div class="entry" style="margin:0 0 8px"><div class="e-body">${esc(n.text)}</div></div>`).join("") || `<div class="empty"><div class="e-txt">还没有快速记录，写点什么吧</div></div>`;
+      const projCards = state.projects.slice(0, 4).map((p) => {
+        const done = p.todos.filter((t) => t.done).length; const pct = p.todos.length ? Math.round(done / p.todos.length * 100) : 0;
+        return `<div class="tile" data-act="openWork" data-id="${p.id}"><div class="t-emoji">${p.emoji}</div><div class="t-name">${esc(p.name)}</div><div class="t-meta">${done}/${p.todos.length} 待办</div><div class="t-prog progress"><i style="width:${pct}%"></i></div></div>`;
+      }).join("");
+      const sug = buildSuggestions("home");
+      const sugHtml = sug.items.map((x) => `<li><span>${esc(x.h)}</span><span>${esc(x.t)}</span></li>`).join("");
+      const flow = [["今天", "🏠"], ["思考", "✍️"], ["收集", "🧠"], ["创作", "🎬"], ["执行", "📁"], ["交付", "👥"], ["复盘", "📊"]].map((f, i) => `<span class="chip cat">${f[1]} ${f[0]}</span>${i < 6 ? '<span style="color:var(--muted)">→</span>' : ""}`).join("");
+      return `<div class="content-inner page-fade">
+        <div class="hero">
+          <div class="hero-row">
+            <div><h2>早安，${esc(state.user.name)} 👋</h2><div class="greet-sub">${WEEK[d.getDay()]} · ${d.getMonth() + 1} 月 ${d.getDate()} 日 · 又是创作的一天</div></div>
+            <div class="weather"><div class="wt">${w.ico}</div><div class="wd">${w.txt} ${w.temp}° · ${esc(w.city)}</div></div>
+          </div>
+          <div class="hero-meta">
+            <div class="hm"><div class="v">🔥 ${state.streak.create}</div><div class="k">连续创作</div></div>
+            <div class="hm"><div class="v">✍️ ${state.streak.journal}</div><div class="k">连续日记</div></div>
+            <div class="hm"><div class="v">📁 ${state.projects.length}</div><div class="k">进行中项目</div></div>
+            <div class="hm"><div class="v">🧠 ${state.inspirations.length}</div><div class="k">灵感</div></div>
+          </div>
+        </div>
+
+        <div class="compass">
+          <div class="c-label">🌱 今日指南针</div>
+          <div class="c-text" id="guidepostText">${esc(state.guidepost)}</div>
+          <button class="btn btn-sm btn-ghost c-edit" data-act="editGuide">✏️ 改写我的指南针</button>
+        </div>
+
+        <div class="section-label">🎯 今日节奏</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">🎯</span><h2>今日最重要的三件事</h2></div>
+            ${prio}
+            <input class="input" id="prioInput" placeholder="添加一件事，回车确认…" style="margin-top:10px">
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">⏰</span><h2>今日时间安排</h2></div>
+            ${sched}
+          </div>
+        </div>
+
+        <div class="section-label">🤖 与 AI 同行</div>
+        <div class="ai-suggest">
+          <div class="ai-glow"></div>
+          <h3>🤖 AI 今日建议</h3>
+          <ul>${sugHtml}</ul>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">💡</span><h2>快速记录</h2><span class="ch-sub">想到就写</span></div>
+            <div id="notesList">${notes}</div>
+            <input class="input" id="noteInput" placeholder="闪过的念头…回车保存" style="margin-top:8px">
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">📌</span><h2>最近进行中的项目</h2><span class="ch-sub">点开看详情</span></div>
+            <div class="stack" style="gap:10px">${projCards}</div>
+          </div>
+        </div>
+
+        <div class="section-label">🧭 你的工作流</div>
+        <div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${flow}</div>
+      </div>`;
+    },
+
+    journal() {
+      const k = dKey(today()); const j = state.journal[k] || {};
+      const moods = MOODS.map((m) => `<span class="mood ${j.mood === m ? "sel" : ""}" data-act="moodPick" data-m="${m}">${m}</span>`).join("");
+      const top3 = (j.top3 || ["", "", ""]).map((v, i) => `<input class="input" data-j="top3" data-i="${i}" value="${esc(v)}" placeholder="第 ${i + 1} 件…">`).join("");
+      return `<div class="content-inner page-fade">
+        <div class="hero" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb 120%)">
+          <div class="hero-row"><div><h2>晨间日记 ✍️</h2><div class="greet-sub">${WEEK[today().getDay()]} · 不用写长篇，凭直觉回答</div></div></div>
+        </div>
+        <div class="stack">
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">😊</span>今天的心情</div>
+            <div class="mood-row" id="moodRow">${moods}</div>
+          </div>
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">🌙</span>昨晚睡得怎么样</div>
+            <input class="input" data-j="sleep" value="${esc(j.sleep || "")}" placeholder="例如：睡了 7 小时，中途醒了一次">
+          </div>
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">🧠</span>现在脑子里最吵的三件事</div>
+            <div class="stack" style="gap:10px">${top3}</div>
+          </div>
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">🎯</span>今天真正重要的一件事</div>
+            <input class="input" data-j="oneThing" value="${esc(j.oneThing || "")}" placeholder="只写一件，写完就安心了">
+          </div>
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">❤️</span>今天想提醒自己什么</div>
+            <textarea class="textarea" data-j="remind" placeholder="一句话，给今天的自己">${esc(j.remind || "")}</textarea>
+          </div>
+          <div class="card q-card">
+            <div class="q-q"><span class="q-emoji">🌙</span>晚间复盘（睡前填）</div>
+            <textarea class="textarea" data-j="evening" placeholder="今天完成了什么？明天想带走的一句话？">${esc(j.evening || "")}</textarea>
+            <button class="btn btn-primary btn-sm" data-act="aiJournal" style="margin-top:12px">🤖 让 AI 帮我总结今天</button>
+            <div id="journalSummary"></div>
+          </div>
+        </div>
+      </div>`;
+    },
+
+    inspiration() {
+      const cats = INSP_CATS.map((c) => {
+        const n = state.inspirations.filter((i) => i.category === c).length;
+        return `<div class="chip cat" data-cat="${c}">${c} <span style="opacity:.6">${n}</span></div>`;
+      }).join("");
+      const list = state.inspirations.slice().reverse().map((i) => `<div class="entry" data-id="${i.id}"><div class="e-top"><span class="chip cat">${esc(i.category)}</span></div><div class="e-body">${esc(i.text)}</div><div class="e-actions"><button data-act="delInsp" data-id="${i.id}">删除</button><button data-act="mergeInsp" data-id="${i.id}">让 AI 归类</button></div></div>`).join("") || `<div class="empty"><div class="e-ico">💡</div><div class="e-txt">灵感库还是空的，写下第一个念头</div></div>`;
+      return `<div class="content-inner page-fade">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head"><span class="ch-ico">➕</span><h2>捕捉灵感</h2><span class="ch-sub">不用整理，AI 帮你做</span></div>
+          <textarea class="textarea" id="inspInput" placeholder="突然想到的内容、看到的广告、一句语录…直接写"></textarea>
+          <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <select class="input" id="inspCat" style="max-width:160px">${INSP_CATS.map((c) => `<option>${c}</option>`).join("")}</select>
+            <button class="btn btn-primary" data-act="addInsp">保存灵感</button>
+          </div>
+        </div>
+        <div class="tabs" style="margin-bottom:12px">${cats}</div>
+        <div id="inspList">${list}</div>
+      </div>`;
+    },
+
+    create() {
+      const tabs = ["全部内容", ...CREATE_TYPES].map((t, i) => `<button class="tab ${i === 0 ? "active" : ""}" data-cat="${esc(t)}">${esc(t)}</button>`).join("");
+      const render = (filter) => {
+        const items = state.creations.filter((c) => filter === "全部内容" || c.type === filter);
+        return items.map((c) => `<div class="entry" data-id="${c.id}"><div class="e-top"><span class="chip cat">${esc(c.type)}</span>${c.status ? `<span class="badge ${c.status === "已发布" ? "ok" : "muted"}">${esc(c.status)}</span>` : ""}${c.platform ? `<span class="e-time">${esc(c.platform)}</span>` : `<span class="e-time"></span>`}</div><div class="e-title">${esc(c.title)}</div>${c.content ? `<div class="e-body" style="margin-top:6px">${esc(c.content)}</div>` : ""}<div class="e-actions"><button data-act="delCreate" data-id="${c.id}">删除</button><button data-act="aiCreate" data-id="${c.id}">🤖 AI 优化</button></div></div>`).join("") || `<div class="empty"><div class="e-ico">🎬</div><div class="e-txt">这个栏目还没有内容</div></div>`;
+      };
+      return `<div class="content-inner page-fade">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head"><span class="ch-ico">✍️</span><h2>新建创作</h2><span class="ch-sub">脚本 / 标题 / Hook / 文案</span></div>
+          <div class="form-grid">
+            <div><label class="field-label">类型</label><select class="input" id="cType">${CREATE_TYPES.map((t) => `<option>${t}</option>`).join("")}</select></div>
+            <div><label class="field-label">标题</label><input class="input" id="cTitle" placeholder="给这条内容起个名字"></div>
+            <div><label class="field-label">内容</label><textarea class="textarea" id="cContent" placeholder="正文、脚本或要点…"></textarea></div>
+            <div style="display:flex;gap:10px"><div style="flex:1"><label class="field-label">平台</label><input class="input" id="cPlatform" placeholder="视频号 / 抖音…"></div><div style="flex:1"><label class="field-label">时长</label><input class="input" id="cDuration" placeholder="6:30"></div></div>
+            <button class="btn btn-primary btn-block" data-act="addCreate">保存到创作中心</button>
+          </div>
+        </div>
+        <div class="tabs" id="createTabs">${tabs}</div>
+        <div id="createList">${render("全部内容")}</div>
+      </div>`;
+    },
+
+    work() {
+      const cards = state.projects.map((p) => {
+        const done = p.todos.filter((t) => t.done).length; const pct = p.todos.length ? Math.round(done / p.todos.length * 100) : 0;
+        return `<div class="tile" data-act="openWork" data-id="${p.id}"><div style="display:flex;align-items:center;gap:10px"><div class="t-emoji">${p.emoji}</div><div class="t-name">${esc(p.name)}</div></div><div class="t-meta">${done}/${p.todos.length} 待办 · ${esc(p.desc)}</div><div class="t-prog progress"><i style="width:${pct}%"></i></div></div>`;
+      }).join("");
+      return `<div class="content-inner page-fade">
+        <div class="card" style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <input class="input" id="projName" placeholder="新项目名称，如：新春礼盒" style="flex:1;min-width:200px">
+          <input class="input" id="projEmoji" placeholder="🎯" style="max-width:80px;text-align:center">
+          <button class="btn btn-primary" data-act="addProj">＋ 新建项目</button>
+        </div>
+        <div class="grid-3" id="projGrid">${cards}</div>
+      </div>`;
+    },
+
+    clients() {
+      const rows = state.clients.map((c) => {
+        const due = c.due || "—";
+        const payCls = c.pay.includes("待") ? "warn" : c.pay.includes("结清") ? "muted" : "ok";
+        return `<tr data-act="openClient" data-id="${c.id}" style="cursor:pointer"><td><b>${esc(c.name)}</b></td><td>${esc(c.owner)}</td><td>${esc(c.quote)}</td><td><span class="badge ${payCls}">${esc(c.pay)}</span></td><td>${c.videos}</td><td>${esc(due)}</td></tr>`;
+      }).join("");
+      return `<div class="content-inner page-fade">
+        <div class="card">
+          <div class="card-head"><span class="ch-ico">👥</span><h2>客户管理</h2><span class="ch-sub">${state.clients.length} 个客户 · 点开看完整档案</span></div>
+          <div style="overflow-x:auto"><table class="table"><thead><tr><th>客户</th><th>负责人</th><th>报价</th><th>付款状态</th><th>影片</th><th>到期</th></tr></thead><tbody>${rows}</tbody></table></div>
+        </div>
+      </div>`;
+    },
+
+    calendar() {
+      const wd = weekDays();
+      const board = wd.map((day, idx) => {
+        const chips = state.calendar.filter((c) => c.day === idx).map((c) => {
+          const ty = CAL_TYPES.find((x) => x.k === c.type) || CAL_TYPES[0];
+          return `<div class="cal-chip ${ty.cls}" draggable="true" data-id="${c.id}">${esc(c.title)}<div style="font-size:10px;opacity:.6;margin-top:2px">${ty.label}</div></div>`;
+        }).join("");
+        return `<div class="cal-day ${day.isToday ? "today" : ""}" data-day="${idx}"><div class="cd-head"><span>${day.label}</span><span class="cd-num">${day.num}</span></div>${chips}<div class="cal-add" data-act="addCal" data-day="${idx}">＋ 添加</div></div>`;
+      }).join("");
+      const legend = CAL_TYPES.map((t) => `<span class="chip cat"><span style="width:8px;height:8px;border-radius:2px;background:var(--${t.cls.replace("t-", "") === "shoot" ? "accent" : t.cls.replace("t-", "") === "edit" ? "accent-2" : t.cls.replace("t-", "") === "post" ? "ok" : t.cls.replace("t-", "") === "live" ? "danger" : t.cls.replace("t-", "") === "course" ? "info" : "warn"};display:inline-block"></span> ${t.label}</span>`).join("");
+      return `<div class="content-inner page-fade">
+        <div class="card" style="margin-bottom:16px">${legend}</div>
+        <div class="cal-board" id="calBoard">${board}</div>
+      </div>`;
+    },
+
+    growth() {
+      const wd = weekDays(); const days = wd.map((d) => d.d);
+      const m = (d, f) => (state.metrics[dKey(d)] || {})[f] || 0;
+      const series = (f) => days.map((d) => m(d, f));
+      const maxOf = (arr) => Math.max(1, ...arr);
+      const bar = (f, color) => { const s = series(f); const mx = maxOf(s); return `<div class="bar-wrap">${s.map((v) => `<div class="bar" title="${v}" style="height:${Math.round(v / mx * 100)}%;${color ? "background:" + color : ""}"></div>`).join("")}<span class="bar-lbl">${wd[s.indexOf(Math.max(...s))].label}</span></div>`; };
+      const todayM = state.metrics[dKey(today())] || {};
+      const metrics = [
+        { ico: "▶️", val: fmtNum(todayM.plays || 4200), label: "今日播放", d: "+12%", up: true },
+        { ico: "❤️", val: todayM.likes || 320, label: "点赞", d: "+8%", up: true },
+        { ico: "💬", val: todayM.comments || 88, label: "评论", d: "+5%", up: true },
+        { ico: "⭐", val: todayM.favorites || 140, label: "收藏", d: "+15%", up: true },
+        { ico: "👥", val: "+" + (todayM.fans || 35), label: "粉丝增长", d: "+20%", up: true },
+        { ico: "🤝", val: todayM.deals || 1, label: "成交", d: "持平", up: true },
+        { ico: "💼", val: todayM.clients || 0, label: "客户数量", d: "新 +1", up: true },
+        { ico: "💰", val: "¥" + (todayM.income || 0), label: "收入", d: todayM.income ? "+100%" : "—", up: !!todayM.income },
+      ].map((x) => `<div class="metric"><div class="m-ico">${x.ico}</div><div class="m-val">${x.val}</div><div class="m-label">${x.label}</div><div class="m-delta ${x.up ? "up" : "down"}">${x.up ? "▲" : "▼"} ${x.d}</div></div>`).join("");
+      return `<div class="content-inner page-fade">
+        <div class="metric-grid">${metrics}</div>
+        <div class="section-label">📈 本周趋势</div>
+        <div class="grid-2">
+          <div class="card"><div class="card-head"><span class="ch-ico">▶️</span><h2>播放量</h2></div><div class="chart">${bar("plays")}</div></div>
+          <div class="card"><div class="card-head"><span class="ch-ico">👥</span><h2>粉丝增长</h2></div><div class="chart">${bar("fans", "linear-gradient(135deg,#34c759,#0a84ff)")}</div></div>
+        </div>
+        <div class="section-label">🤖 AI 自动总结</div>
+        <div class="grid-2">
+          <div class="summary-box"><h4>本周总结</h4><p>本周共发布内容，播放量稳步上升，6 分钟内的干货完播率最高。粉丝增长来自 2 条个人 IP 视频，说明「真实分享」比「精致包装」更吸粉。建议下周继续维持每周 3 条、单条 ≤ 6 分钟。</p></div>
+          <div class="summary-box"><h4>本月总结</h4><p>本月收入主要来自 PM Catering 与伴手礼项目，客户续约信号明显。个人 IP 产出偏少，是下个月要补的短板。整体趋势健康，连续创作 ${state.streak.create} 天，状态在线。</p></div>
+        </div>
+        <div class="summary-box" style="margin-top:16px"><h4>🤖 AI 分析</h4><p>你的内容在「观点 + 故事」组合时数据最好。建议把灵感库里「创作者焦虑」那条观点，配上 PM Catering 的真实案例，做成下一条爆款。需要我帮你起草脚本吗？</p></div>
+      </div>`;
+    },
+
+    learn() {
+      const cats = LEARN_CATS.map((c) => {
+        const n = state.learn.filter((i) => i.category === c).length;
+        return `<div class="chip cat" data-lcat="${c}">${c} <span style="opacity:.6">${n}</span></div>`;
+      }).join("");
+      const list = state.learn.slice().reverse().map((i) => `<div class="entry" data-id="${i.id}"><div class="e-top"><span class="chip cat">${esc(i.category)}</span></div><div class="e-title">${esc(i.title)}</div><div class="e-body">${esc(i.content)}</div><div class="e-actions"><button data-act="delLearn" data-id="${i.id}">删除</button></div></div>`).join("") || `<div class="empty"><div class="e-ico">📚</div><div class="e-txt">知识库还是空的，记下第一条</div></div>`;
+      return `<div class="content-inner page-fade">
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head"><span class="ch-ico">📝</span><h2>收藏到知识库</h2><span class="ch-sub">读书笔记 · 课程 · AI · 营销…</span></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+            <select class="input" id="learnCat" style="max-width:160px">${LEARN_CATS.map((c) => `<option>${c}</option>`).join("")}</select>
+            <input class="input" id="learnTitle" placeholder="标题，如：Prompt 工程笔记" style="flex:1;min-width:160px">
+          </div>
+          <textarea class="textarea" id="learnContent" placeholder="笔记内容…"></textarea>
+          <button class="btn btn-primary" data-act="addLearn" style="margin-top:10px">保存</button>
+        </div>
+        <div class="tabs" style="margin-bottom:12px">${cats}</div>
+        <div id="learnList">${list}</div>
+      </div>`;
+    },
+
+    settings() {
+      const s = state;
+      const tog = (id, on, label) => `<div class="set-row"><span class="s-ico">${label}</span><div class="s-text"><div class="s-title">${id}</div></div><div class="toggle ${on ? "on" : ""}" data-toggle="${id}"></div></div>`;
+      return `<div class="content-inner page-fade">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">⚙️</span><h2>账号与偏好</h2></div>
+            <div class="form-grid">
+              <div><label class="field-label">昵称</label><input class="input" id="setName" value="${esc(s.user.name)}"></div>
+              <div><label class="field-label">头像字</label><input class="input" id="setAvatar" value="${esc(s.user.avatar)}" maxlength="2" style="max-width:120px"></div>
+              <div><label class="field-label">城市（天气）</label><input class="input" id="setCity" value="${esc(s.user.city)}"></div>
+            </div>
+            <button class="btn btn-primary" data-act="saveProfile" style="margin-top:14px">保存资料</button>
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="ch-ico">🎨</span><h2>外观与同步</h2></div>
+            ${tog("深色模式", s.theme === "dark", "🌙")}
+            ${tog("AI 助手", s.aiOn, "✨")}
+            ${tog("数据同步", true, "☁️")}
+            ${tog("通知", false, "🔔")}
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-head"><span class="ch-ico">💾</span><h2>数据与备份</h2></div>
+          <p style="color:var(--text-2);font-size:13.5px">所有数据保存在本机浏览器中。你可以导出备份，或在换设备时导入。</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn" data-act="exportData">⬇️ 导出备份</button>
+            <button class="btn" data-act="importData">⬆️ 导入备份</button>
+            <button class="btn btn-danger" data-act="resetData">🗑 清空重置</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-head"><span class="ch-ico">🤖</span><h2>AI 设置</h2></div>
+          <p style="color:var(--text-2);font-size:13.5px">当前为本地智能助手（基于你的数据生成建议）。接入大模型 API 后可获得更强的对话能力。</p>
+          <button class="btn" data-act="connectAI" style="margin-top:12px">🔗 连接大模型（演示）</button>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-head"><span class="ch-ico">🧭</span><h2>你的工作流</h2></div>
+          <p style="color:var(--text-2);font-size:14px;line-height:1.9">🏠 今天 → ✍️ 思考 → 🧠 收集 → 🎬 创作 → 📁 执行 → 👥 交付 → 📊 复盘</p>
+          <p style="color:var(--muted);font-size:12.5px;margin-top:8px">这已经不是软件，而是你的工作流程。</p>
+        </div>
+      </div>`;
+    },
+  };
+
+  /* ---------------- 路由 ---------------- */
+  let currentPage = "home";
+  function navigate(key) {
+    if (!PAGES[key]) key = "home";
+    currentPage = key; state._page = key; save();
+    const c = $("#content"); c.innerHTML = PAGES[key]();
+    $("#pageTitle").textContent = PAGE_META[key].t;
+    $("#pageSub").textContent = PAGE_META[key].s;
+    renderNav(); updateAiContext();
+    c.scrollTop = 0;
+    closeDrawer();
+  }
+
+  /* ---------------- AI 面板 ---------------- */
+  function updateAiContext() {
+    const ctx = buildSuggestions(currentPage);
+    const quick = ["推荐标题", "写个 Hook", "整理灵感", "今日安排", "帮我复盘"].map((q) => `<span class="chip" data-aiq="${esc(q)}">${q}</span>`).join("");
+    $("#aiContext").innerHTML = `<div class="ac-title">${esc(ctx.title)}</div>${ctx.items.map((x) => `<div class="ac-suggest"><div class="acs-h">${esc(x.h)}</div><div class="acs-tip">${esc(x.t)}</div></div>`).join("")}<div class="ac-quick">${quick}</div>`;
+    if ($("#aiMessages").children.length === 0) {
+      addMsg("ai", "嗨 " + state.user.name + "，我是你的创作助手 ✨\n我在「" + PAGE_META[currentPage].t + "」页面，随时帮你出标题、理灵感、看数据。");
+    }
+  }
+  function addMsg(role, text) {
+    const box = $("#aiMessages");
+    const el = document.createElement("div");
+    el.className = "msg " + role;
+    if (role === "ai") { const r = document.createElement("div"); r.className = "m-role"; r.textContent = "AI 助手"; el.appendChild(r); }
+    el.appendChild(document.createTextNode(text));
+    box.appendChild(el); box.scrollTop = box.scrollHeight;
+    return el;
+  }
+  function sendAi(text) {
+    text = (text || "").trim(); if (!text) return;
+    addMsg("me", text);
+    const typing = addMsg("ai", ""); typing.innerHTML = '<div class="m-role">AI 助手</div><span class="typing"><i></i><i></i><i></i></span>';
+    setTimeout(() => { typing.textContent = ""; const r = document.createElement("div"); r.className = "m-role"; r.textContent = "AI 助手"; typing.appendChild(r); typing.appendChild(document.createTextNode(aiReply(text, currentPage))); $("#aiMessages").scrollTop = $("#aiMessages").scrollHeight; }, 520);
+  }
+
+  /* ---------------- 抽屉/面板 ---------------- */
+  function openDrawer() { $("#sidebar").classList.add("open"); $("#backdrop").classList.add("show"); }
+  function closeDrawer() { $("#sidebar").classList.remove("open"); $("#backdrop").classList.remove("show"); }
+  function toggleAi(force) {
+    const app = $(".app"); const hidden = app.classList.contains("ai-hidden");
+    const next = force != null ? force : !hidden;
+    app.classList.toggle("ai-hidden", next);
+  }
+
+  /* ---------------- 具体交互 ---------------- */
+  function openWork(id) {
+    const p = state.projects.find((x) => x.id === id); if (!p) return;
+    const todos = p.todos.map((t, i) => `<div class="prio-item ${t.done ? "done" : ""}"><div class="check ${t.done ? "done" : ""}" data-act="projTodo" data-id="${p.id}" data-i="${i}"></div><div class="ptext">${esc(t.text)}</div></div>`).join("");
+    const body = `<div class="form-grid">
+      <div><label class="field-label">项目简介</label><textarea class="textarea" id="pDesc">${esc(p.desc)}</textarea></div>
+      <div><label class="field-label">待办事项</label><div id="pTodos">${todos}</div><button class="btn btn-sm btn-ghost" data-act="addProjTodo" data-id="${p.id}">＋ 添加待办</button></div>
+      <div><label class="field-label">时间线 / 备注</label><textarea class="textarea" id="pNotes" placeholder="关键节点、会议记录、文件链接…">${esc(p.notes || "")}</textarea></div>
+    </div>`;
+    openModal(p.emoji + " " + p.name, body, (m, close) => {
+      m.querySelector("#pTodos").addEventListener("click", (e) => {
+        const ck = e.target.closest('[data-act="projTodo"]'); if (!ck) return;
+        p.todos[+ck.dataset.i].done = !p.todos[+ck.dataset.i].done; save(); ck.classList.toggle("done"); ck.parentElement.classList.toggle("done");
+      });
+      m.querySelector('[data-act="addProjTodo"]').onclick = () => {
+        const tx = prompt("新待办："); if (!tx) return; p.todos.push({ text: tx, done: false }); save();
+        const d = document.createElement("div"); d.className = "prio-item"; d.innerHTML = `<div class="check" data-act="projTodo" data-id="${p.id}" data-i="${p.todos.length - 1}"></div><div class="ptext">${esc(tx)}</div>`; m.querySelector("#pTodos").appendChild(d);
+      };
+      const foot = document.createElement("div"); foot.className = "modal-foot"; foot.innerHTML = `<button class="btn btn-danger" data-delproj="1" data-id="${p.id}">删除项目</button><button class="btn btn-primary" data-close>完成</button>`;
+      m.querySelector(".modal-body").appendChild(foot);
+      foot.querySelector('[data-delproj]').onclick = () => { if (confirm("确定删除该项目？")) { state.projects = state.projects.filter((x) => x.id !== p.id); save(); close(); navigate("work"); } };
+      foot.querySelector('[data-close]').onclick = () => { p.desc = m.querySelector("#pDesc").value; p.notes = m.querySelector("#pNotes").value; save(); };
+    });
+  }
+
+  function openClient(id) {
+    const c = state.clients.find((x) => x.id === id); if (!c) return;
+    const comms = (c.comms || []).map((x) => `<div class="entry" style="margin:0 0 8px"><div class="e-time">${esc(typeof x.t === "string" ? x.t : "")}</div><div class="e-body">${esc(x.text)}</div></div>`).join("") || '<div class="empty"><div class="e-txt">暂无沟通记录</div></div>';
+    const body = `<div class="form-grid">
+      <div style="display:flex;gap:10px"><div style="flex:1"><label class="field-label">负责人</label><input class="input" id="cOwner" value="${esc(c.owner)}"></div><div style="flex:1"><label class="field-label">报价</label><input class="input" id="cQuote" value="${esc(c.quote)}"></div></div>
+      <div style="display:flex;gap:10px"><div style="flex:1"><label class="field-label">付款状态</label><input class="input" id="cPay" value="${esc(c.pay)}"></div><div style="flex:1"><label class="field-label">影片数量</label><input class="input" id="cVideos" value="${c.videos}"></div></div>
+      <div><label class="field-label">合作历史</label><textarea class="textarea" id="cHistory">${esc(c.history || "")}</textarea></div>
+      <div><label class="field-label">沟通记录</label>${comms}</div>
+    </div>`;
+    openModal("👥 " + c.name, body, (m, close) => {
+      const foot = document.createElement("div"); foot.className = "modal-foot"; foot.innerHTML = `<button class="btn btn-primary" data-close>保存</button>`;
+      m.querySelector(".modal-body").appendChild(foot);
+      foot.querySelector('[data-close]').onclick = () => { c.owner = m.querySelector("#cOwner").value; c.quote = m.querySelector("#cQuote").value; c.pay = m.querySelector("#cPay").value; c.videos = +m.querySelector("#cVideos").value || 0; c.history = m.querySelector("#cHistory").value; save(); close(); navigate("clients"); };
+    });
+  }
+
+  /* ---------------- 事件委托 ---------------- */
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-act]"); if (!t) return;
+    const act = t.dataset.act, id = t.dataset.id;
+    switch (act) {
+      case "prioToggle": { const p = state.priorities.find((x) => x.id === id); p.done = !p.done; save(); navigate("home"); break; }
+      case "prioDel": { state.priorities = state.priorities.filter((x) => x.id !== id); save(); navigate("home"); break; }
+      case "editGuide": {
+        openModal("🌱 改写今日指南针", `<textarea class="textarea" id="gp">${esc(state.guidepost)}</textarea>`, (m, close) => {
+          const foot = document.createElement("div"); foot.className = "modal-foot"; foot.innerHTML = `<button class="btn btn-ghost" data-close>取消</button><button class="btn btn-primary" data-act="ok">保存</button>`; m.querySelector(".modal-body").appendChild(foot);
+          foot.querySelector('[data-act="ok"]').onclick = () => { state.guidepost = m.querySelector("#gp").value; save(); close(); navigate("home"); };
+        }); break;
+      }
+      case "openWork": openWork(id); break;
+      case "openClient": openClient(id); break;
+      case "addProj": {
+        const nm = $("#projName").value.trim(); if (!nm) return;
+        state.projects.unshift({ id: uid(), emoji: $("#projEmoji").value.trim() || "📁", name: nm, desc: "", todos: [], color: "#ff6a3d", notes: "" });
+        save(); navigate("work"); break;
+      }
+      case "delProj": { state.projects = state.projects.filter((x) => x.id !== id); save(); navigate("work"); break; }
+      case "addInsp": {
+        const tx = $("#inspInput").value.trim(); if (!tx) return;
+        state.inspirations.push({ id: uid(), category: $("#inspCat").value, text: tx, t: today() });
+        save(); navigate("inspiration"); break;
+      }
+      case "delInsp": { state.inspirations = state.inspirations.filter((x) => x.id !== id); save(); navigate("inspiration"); break; }
+      case "mergeInsp": {
+        const i = state.inspirations.find((x) => x.id === id);
+        addMsg("ai", "这条「" + (i ? i.category : "") + "」灵感我帮你归好类啦：" + (i ? i.text : "") + "\n建议和同类灵感合成一个选题，需要我起草吗？");
+        toggleAi(false); break;
+      }
+      case "addCreate": {
+        const title = $("#cTitle").value.trim(); if (!title) return;
+        state.creations.unshift({ id: uid(), type: $("#cType").value, title, content: $("#cContent").value.trim(), platform: $("#cPlatform").value.trim(), duration: $("#cDuration").value.trim(), status: "草稿" });
+        save(); navigate("create"); break;
+      }
+      case "delCreate": { state.creations = state.creations.filter((x) => x.id !== id); save(); navigate("create"); break; }
+      case "aiCreate": { const c = state.creations.find((x) => x.id === id); addMsg("ai", "针对《" + (c ? c.title : "") + "》，我建议：开场用反常识 Hook，中段给 1 个可操作方法，结尾用「你最一次______？」做互动 CTA。要我直接改文案吗？"); toggleAi(false); break; }
+      case "addLearn": {
+        const title = $("#learnTitle").value.trim(); if (!title) return;
+        state.learn.unshift({ id: uid(), category: $("#learnCat").value, title, content: $("#learnContent").value.trim(), t: today() });
+        save(); navigate("learn"); break;
+      }
+      case "delLearn": { state.learn = state.learn.filter((x) => x.id !== id); save(); navigate("learn"); break; }
+      case "addCal": {
+        const day = +t.dataset.day; const title = prompt("添加内容（标题）："); if (!title) break;
+        const types = CAL_TYPES.map((x) => x.label).join(" / ");
+        const tl = prompt("类型（" + types + "）：", "拍摄");
+        let type = "shoot";
+        if (tl) { const f = CAL_TYPES.find((x) => x.label === tl.trim()); if (f) type = f.k; }
+        state.calendar.push({ id: uid(), type, title, day }); save(); navigate("calendar"); break;
+      }
+      case "moodPick": { const j = state.journal[dKey(today())] || {}; j.mood = t.dataset.m; state.journal[dKey(today())] = j; save(); $$("#moodRow .mood").forEach((x) => x.classList.toggle("sel", x.dataset.m === j.mood)); break; }
+      case "aiJournal": {
+        const j = state.journal[dKey(today())] || {};
+        const sum = "今日复盘：心情" + (j.mood || "未填") + "，睡眠" + (j.sleep || "未记") + "。今天最重要的一件事是「" + (j.oneThing || "—") + "」。提醒自己：" + (j.remind || "保持节奏") + "。明天继续，不急。🌱";
+        $("#journalSummary").innerHTML = `<div class="summary-box" style="margin-top:12px"><h4>🤖 AI 总结</h4><p>${esc(sum)}</p></div>`; break;
+      }
+      case "saveProfile": {
+        state.user.name = $("#setName").value.trim() || "我"; state.user.avatar = ($("#setAvatar").value.trim() || "我").slice(0, 2); state.user.city = $("#setCity").value.trim() || "上海"; save(); renderNav(); navigate("settings"); break;
+      }
+      case "exportData": {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "creator-os-backup.json"; a.click(); break;
+      }
+      case "importData": { const inp = document.createElement("input"); inp.type = "file"; inp.accept = "application/json"; inp.onchange = () => { const f = inp.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { state = JSON.parse(rd.result); save(); navigate("home"); } catch (e) { alert("文件格式不对"); } }; rd.readAsText(f); }; inp.click(); break; }
+      case "resetData": { if (confirm("确定清空所有数据并重置？")) { localStorage.removeItem(KEY); state = seed(); save(); navigate("home"); } break; }
+      case "connectAI": { addMsg("ai", "演示模式：当前使用本地智能助手。接入大模型 API 后，这里会变成真正的对话引擎 —— 你的内容、客户、数据都会成为它的上下文。"); toggleAi(false); break; }
+    }
+  });
+
+  // 日历拖拽
+  document.addEventListener("dragstart", (e) => { const c = e.target.closest(".cal-chip"); if (c) { c.classList.add("dragging"); e.dataTransfer.setData("text/plain", c.dataset.id); } });
+  document.addEventListener("dragend", (e) => { const c = e.target.closest(".cal-chip"); if (c) c.classList.remove("dragging"); });
+  document.addEventListener("dragover", (e) => { const d = e.target.closest(".cal-day"); if (d) { e.preventDefault(); d.classList.add("drop-hover"); } });
+  document.addEventListener("dragleave", (e) => { const d = e.target.closest(".cal-day"); if (d) d.classList.remove("drop-hover"); });
+  document.addEventListener("drop", (e) => {
+    const d = e.target.closest(".cal-day"); if (!d) return; e.preventDefault(); d.classList.remove("drop-hover");
+    const cid = e.dataTransfer.getData("text/plain"); const item = state.calendar.find((x) => x.id === cid);
+    if (item) { item.day = +d.dataset.day; save(); navigate("calendar"); }
+  });
+
+  // 输入框回车：优先级 / 快速记录
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.id === "prioInput") {
+      const v = e.target.value.trim(); if (!v) return; state.priorities.push({ id: uid(), text: v, done: false }); save(); navigate("home");
+    }
+    if (e.key === "Enter" && e.target.id === "noteInput") {
+      const v = e.target.value.trim(); if (!v) return; state.quickNotes.unshift({ id: uid(), text: v, t: today() }); save(); navigate("home");
+    }
+  });
+
+  // 晨间日记实时保存
+  document.addEventListener("input", (e) => {
+    const el = e.target; if (!el.dataset.j) return;
+    const j = state.journal[dKey(today())] || {};
+    if (el.dataset.j === "top3") { j.top3 = j.top3 || ["", "", ""]; j.top3[+el.dataset.i] = el.value; }
+    else j[el.dataset.j] = el.value;
+    state.journal[dKey(today())] = j; save();
+  });
+  // 优先级文本编辑
+  document.addEventListener("blur", (e) => {
+    const el = e.target; if (el.dataset && el.dataset.act === "prioEdit") {
+      const p = state.priorities.find((x) => x.id === el.dataset.id); if (p) { p.text = el.textContent.trim(); save(); }
+    }
+  }, true);
+
+  // 创作中心 tab 切换
+  document.addEventListener("click", (e) => {
+    const tab = e.target.closest("#createTabs .tab, .tabs .chip[data-cat], .tabs .chip[data-lcat]");
+    if (tab && tab.classList.contains("tab")) {
+      $$("#createTabs .tab").forEach((x) => x.classList.remove("active")); tab.classList.add("active");
+      const f = tab.dataset.cat;
+      const items = state.creations.filter((c) => f === "全部内容" || c.type === f);
+      $("#createList").innerHTML = items.map((c) => `<div class="entry" data-id="${c.id}"><div class="e-top"><span class="chip cat">${esc(c.type)}</span>${c.status ? `<span class="badge ${c.status === "已发布" ? "ok" : "muted"}">${esc(c.status)}</span>` : ""}${c.platform ? `<span class="e-time">${esc(c.platform)}</span>` : ""}</div><div class="e-title">${esc(c.title)}</div>${c.content ? `<div class="e-body" style="margin-top:6px">${esc(c.content)}</div>` : ""}<div class="e-actions"><button data-act="delCreate" data-id="${c.id}">删除</button><button data-act="aiCreate" data-id="${c.id}">🤖 AI 优化</button></div></div>`).join("") || `<div class="empty"><div class="e-ico">🎬</div><div class="e-txt">这个栏目还没有内容</div></div>`;
+    }
+  });
+
+  // AI 快捷问
+  document.addEventListener("click", (e) => {
+    const q = e.target.closest("[data-aiq]"); if (q) sendAi(q.dataset.aiq);
+  });
+
+  /* ---------------- 顶部/侧栏按钮 ---------------- */
+  $("#menuBtn").onclick = openDrawer;
+  $("#backdrop").onclick = closeDrawer;
+  $("#aiBtn").onclick = () => toggleAi();
+  $("#fabAi").onclick = () => toggleAi(false);
+  $("#aiClose").onclick = () => toggleAi(true);
+  $("#todayBtn").onclick = () => navigate("home");
+  $("#openSettings").onclick = () => navigate("settings");
+  $("#aiForm").onsubmit = (e) => { e.preventDefault(); const v = $("#aiInput").value; $("#aiInput").value = ""; sendAi(v); };
+
+  // 设置开关
+  document.addEventListener("click", (e) => {
+    const tg = e.target.closest("[data-toggle]"); if (!tg) return;
+    const id = tg.dataset.toggle; tg.classList.toggle("on");
+    if (id === "深色模式") { state.theme = tg.classList.contains("on") ? "dark" : "light"; applyTheme(); save(); }
+    if (id === "AI 助手") { state.aiOn = tg.classList.contains("on"); save(); }
+  });
+
+  function applyTheme() { document.documentElement.setAttribute("data-theme", state.theme === "dark" ? "dark" : "light"); }
+
+  // 响应式：窄屏默认收起 AI
+  function responsiveAi() { if (window.innerWidth <= 1180) toggleAi(true); else toggleAi(false); }
+
+  /* ---------------- 启动 ---------------- */
+  applyTheme();
+  renderNav();
+  navigate("home");
+  toggleAi(window.innerWidth <= 1180);
+  window.addEventListener("resize", () => { toggleAi(window.innerWidth <= 1180); });
+})();
+
+</script><div class="modal-wrap"></div>
+
+
+</body></html>
